@@ -10,7 +10,7 @@ import { Transaction } from './types/transaction.type';
       <header>
         <h2>Transactions</h2>
         <h3>Current Balance: $ {{ currentBalance() }}</h3>
-        <button (click)="openAddTransactionDialog()">Add Transaction</button>
+        <button id="addTransactionBtn" (click)="openAddTransactionDialog()">Add Transaction</button>
       </header>
       <table>
         <thead>
@@ -23,13 +23,14 @@ import { Transaction } from './types/transaction.type';
         </thead>
         <tbody>
           @for (transaction of transactions(); track transaction.id) {
-          <tr [class.negative]="transaction.amount < 0">
+          <tr [class.negative]="transaction.amount < 0" class="transaction-row">
             <td>{{ transaction.title }}</td>
             <td>{{ transaction.amount }}</td>
             <td>{{ transaction.date | date }}</td>
             <td class="actions">
               <button
                 class="danger"
+                id="deleteTransactionBtn"
                 (click)="deleteTransaction(transaction.id)"
               >
                 Delete
